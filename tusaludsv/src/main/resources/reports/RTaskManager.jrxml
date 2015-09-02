@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTaskManager" language="groovy" pageWidth="900" pageHeight="595" orientation="Landscape" columnWidth="860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bdfe1731-5183-468d-9b75-6d798bae8996">
+	<property name="ireport.zoom" value="2.3579476910000086"/>
+	<property name="ireport.x" value="974"/>
+	<property name="ireport.y" value="161"/>
+	<parameter name="pFechaIni" class="java.lang.String"/>
+	<parameter name="pFechaFinal" class="java.lang.String"/>
+	<parameter name="pStatu" class="java.lang.String"/>
+	<parameter name="pOwner" class="java.lang.String"/>
+	<parameter name="pTeam" class="java.lang.String"/>
+	<parameter name="pTskName" class="java.lang.String"/>
+	<field name="dependTask" class="java.lang.String"/>
+	<field name="tskTeam" class="java.lang.String"/>
+	<field name="tskPriority" class="java.lang.String"/>
+	<field name="tskProject" class="java.lang.String"/>
+	<field name="tskStatus" class="java.lang.String"/>
+	<field name="tskOwner" class="java.lang.String"/>
+	<field name="tskDescription" class="java.lang.String"/>
+	<field name="systemOperation" class="java.lang.String"/>
+	<field name="tskEstimatedStartTime" class="java.lang.String"/>
+	<field name="tskEstimatedEndTime" class="java.lang.String"/>
+	<field name="tskEstimatedTotalTime" class="java.lang.String"/>
+	<field name="tskRealStartTime" class="java.lang.String"/>
+	<field name="tskRealEndTime" class="java.lang.String"/>
+	<field name="tskRealTotalTime" class="java.lang.String"/>
+	<field name="tskEstimatedPercent" class="java.lang.String"/>
+	<field name="tskRealPercent" class="java.lang.String"/>
+	<field name="tskIdDepend" class="java.lang.String"/>
+	<field name="pkTmTsk" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement x="297" y="2" width="206" height="20" uuid="feec41c3-fcee-4ce4-8cae-42b2908d669b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Task Manager - Dashboard]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="25" width="801" height="52" uuid="57435ab1-8297-4c39-b7be-a0c63a3c657a"/>
+				<staticText>
+					<reportElement x="3" y="6" width="71" height="20" uuid="c4f3d141-6aa2-44ac-91e2-c9a905170d7d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Start Time:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="91" y="6" width="74" height="20" uuid="31832839-ef7b-4c52-b509-153f6ae82611"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[End Time:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="221" y="6" width="82" height="20" uuid="b8f0421d-445a-40f4-9e70-1f72d6916a7e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Task Status:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="372" y="6" width="100" height="20" uuid="e030f073-110f-4eed-b5a8-9a7e73ab1ffb"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Task Owner:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="498" y="6" width="100" height="20" uuid="5d76bdab-585c-4243-9dce-c100650b551d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Responsible Team:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="627" y="6" width="100" height="20" uuid="80e9a249-bed6-481d-a1d3-f78ac6d6c479"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Task Name:]]></text>
+				</staticText>
+				<textField pattern="yyyy-MM-dd hh:mm:a" isBlankWhenNull="true">
+					<reportElement x="3" y="26" width="71" height="20" uuid="14fd4199-71cc-46cc-851e-525736231ae0"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{pFechaIni}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy-MM-dd hh:mm:a" isBlankWhenNull="true">
+					<reportElement x="91" y="26" width="74" height="20" uuid="02964e76-b450-4d09-89ff-2744cf736b8f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{pFechaFinal}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="221" y="26" width="82" height="20" uuid="7ccb910a-1f10-4ec6-8e1b-00af86a1bba9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{pStatu}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="372" y="26" width="100" height="20" uuid="6a42ee9c-82cf-4253-a2de-57a2c3ba0731"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{pOwner}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="498" y="26" width="100" height="20" uuid="353152d1-2bbd-4480-8bcb-374e8f1139d1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{pTeam}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="627" y="26" width="100" height="20" uuid="01216d6d-5864-4a0f-aabb-d453d484786b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{pTskName}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="860" height="58" forecolor="#000000" backcolor="#CCCCCC" uuid="c04eed51-5a0b-40bf-850b-37d72c2b69bb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement mode="Transparent" x="1" y="29" width="37" height="27" forecolor="#000000" uuid="a8e2dcc4-68e8-4618-a873-9d880de79826"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[ID
+TASK]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="39" y="28" width="57" height="28" forecolor="#000000" uuid="5ea3170d-c19d-41f6-ad9e-f6526b3604e7"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[ID Task depend]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="98" y="28" width="100" height="28" forecolor="#000000" uuid="93267a62-3df9-4279-a38f-5a8e4737996e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Description]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="201" y="28" width="54" height="28" forecolor="#000000" uuid="2b3bc1fe-ce78-45a6-95be-23aea3b4d578"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Owner
+Task]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="257" y="28" width="87" height="28" forecolor="#000000" uuid="7ef7709c-07bd-46b1-83d9-7be17f12561f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[System/Operation
+Step]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="345" y="28" width="42" height="28" forecolor="#000000" uuid="6f12a1c0-3d7a-424a-8811-6d14226bf02e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Start
+Time]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="389" y="28" width="42" height="28" forecolor="#000000" uuid="985fbbde-05db-4d93-87e4-ba157bbe44b4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[End
+Time]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="433" y="28" width="40" height="28" forecolor="#000000" uuid="ab6b6726-a284-4ee0-9140-30bbf06ca054"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Total
+Time]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="475" y="28" width="42" height="28" forecolor="#000000" uuid="97d7de85-2f29-48b0-bab1-9affb24887f4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Start
+Time]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="520" y="28" width="46" height="28" forecolor="#000000" uuid="eeb50d39-bd73-43bf-8e91-b8f2ed36b08d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isStrikeThrough="false" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[End
+Time]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="569" y="28" width="42" height="28" forecolor="#000000" uuid="eea8c83a-9152-4e3d-b206-a2ec075d7f02"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Total
+Time]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="613" y="28" width="38" height="28" forecolor="#000000" uuid="1ac7291e-be90-428b-8584-ac534c29afef"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Status]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="653" y="28" width="60" height="28" forecolor="#000000" uuid="f03260c3-5b01-40a9-8f14-84c28f90d9bd"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Real]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="715" y="28" width="60" height="28" forecolor="#000000" uuid="98186b05-2a44-4483-931b-b4c1ef31db4e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Estimated]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="777" y="28" width="82" height="28" forecolor="#000000" uuid="2328bccb-e88e-4155-aaf8-2680d87532a6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Responsible
+Team]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="345" y="6" width="128" height="18" forecolor="#000000" uuid="c6d0b523-b7c3-45e3-b2f8-3eb54c820720"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Estimated]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="475" y="6" width="136" height="18" forecolor="#000000" uuid="6227c12a-1dd6-4487-bb24-47e61104eaf5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[Real]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="653" y="6" width="122" height="18" forecolor="#000000" uuid="f87a8a8e-0591-4450-8f08-6b8271e23e47"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[PERCENT PROGRESS]]></text>
+				</staticText>
+				<line>
+					<reportElement x="387" y="26" width="1" height="31" uuid="b92ac5a3-ccc9-45ac-8f01-935a1ab74d82"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="344" y="0" width="1" height="58" uuid="7cfe0414-af32-43b6-9e2d-6d43bbb27762"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="38" y="0" width="1" height="58" uuid="8c1a3530-de4f-400c-981b-23d75eafea70"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="431" y="26" width="1" height="32" uuid="93e806f3-815b-4d02-987b-c9722653382c"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="775" y="0" width="1" height="58" uuid="7b665cbb-c5f3-4995-9e24-2cc0adc038fe"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="651" y="0" width="1" height="58" uuid="7de3ece4-4d6b-4355-ac5f-110a878cfc86"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="199" y="0" width="1" height="58" uuid="40ee4b93-2bbb-4205-8bae-5ddd2082ce52"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="97" y="0" width="1" height="58" uuid="38b44e98-5e42-400c-a9da-6eb6739a6bbd"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="612" y="0" width="1" height="58" uuid="afd31b60-3ea2-447e-bd0d-32988268b4c1"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="255" y="0" width="1" height="58" uuid="a5801581-fca8-41c5-8b48-7725a8b8eb57"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="567" y="26" width="1" height="32" uuid="9fca2e17-128a-4107-a326-b4a7e05ab48f"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="518" y="26" width="1" height="32" uuid="0d620c2b-f38b-4ec1-8082-af863fa012a7"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="474" y="0" width="1" height="58" uuid="590e5dd9-7061-45e9-bc9f-1a0f2bc2f158"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="714" y="26" width="1" height="32" uuid="98091278-8f65-46ac-a089-d8a459655054"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="345" y="25" width="129" height="1" uuid="2fee8878-87da-4a71-a52c-f2d563882778"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="475" y="25" width="137" height="1" uuid="6f02534d-36b3-41a6-a704-00dae12a8662"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="653" y="25" width="122" height="1" uuid="2234aa90-0101-4e69-9fce-55344ff49e5d"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="23" width="38" height="1" uuid="2bc9f9d1-a8e0-467a-b025-c31f790078c7"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</graphicElement>
+				</line>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="860" height="20" uuid="0210e666-592f-4152-bd4b-3d328634b437"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="1" y="0" width="37" height="20" uuid="a97c0377-7b1d-47d9-b77e-f7b1a7d7e889"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pkTmTsk}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="39" y="0" width="57" height="20" uuid="16e17f6c-48bc-4c24-a6da-416f490be806"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskIdDepend}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="98" y="0" width="100" height="20" uuid="dff5f723-0e70-4076-99f5-29345a4dc925"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskDescription}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="201" y="0" width="54" height="20" uuid="fe42f502-a26c-4ac5-a2eb-887dc75daa92"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskOwner}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="258" y="0" width="87" height="20" uuid="61a718bd-49dc-4a74-be79-bef66690f444"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{systemOperation}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="345" y="0" width="42" height="20" uuid="c51c2251-03aa-4dde-8e1e-0c7ada1c080e"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskEstimatedStartTime}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="389" y="0" width="42" height="20" uuid="07f764be-e6c6-4f91-9642-09cefbd0b900"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskEstimatedEndTime}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="433" y="0" width="40" height="20" uuid="5d284d95-cbd8-455d-b5ed-5f7c92e984e2"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskEstimatedTotalTime}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="475" y="0" width="42" height="20" uuid="cd0e9a43-8c7c-4232-b598-d41f0f9ed6b8"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskRealStartTime}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="520" y="0" width="46" height="20" uuid="98feda83-a6a4-4981-aaac-f718a951987b"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskRealEndTime}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="568" y="0" width="43" height="20" uuid="26b10bea-b535-4e47-8795-e71bfceac64a"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskRealTotalTime}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="613" y="0" width="38" height="20" uuid="8af96a0d-8c08-494b-a874-5e92e5f2ea08"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskStatus}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="653" y="0" width="60" height="20" uuid="827400cd-e132-482b-8b42-55d3010592b4"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskRealPercent}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="715" y="0" width="60" height="20" uuid="79ca3c6c-2a51-4674-a261-3d22237364f7"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskEstimatedPercent}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToBandHeight" x="777" y="0" width="82" height="20" uuid="39f9dd91-97eb-42fc-9547-6d06baf948b7"/>
+					<box leftPadding="1" rightPadding="1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tskTeam}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="14" splitType="Stretch"/>
+	</summary>
+</jasperReport>

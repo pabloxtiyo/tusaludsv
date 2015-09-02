@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<script type="text/javascript"
+	th:src="@{resources/js/jquery-1.11.3.min.js}"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{resources/css/bootstrap.css}" />
+<script type="text/javascript" th:src="@{resources/js/bootstrap.js}"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{resources/css/styleapp.css}" />
+<link rel="stylesheet"
+	th:href="@{/resources/js/jquery-ui/css/jquery-ui-timepicker-addon.css}" />
+<link rel="stylesheet"
+	th:href="@{/resources/js/jquery-ui/css/jquery-ui.css}" />
+<link rel="stylesheet"
+	th:href="@{/resources/js/jquery-ui/css/jquery.ui.datepicker.min.css}" />
+</head>
+<body>
+
+	<div id="wrap" align="center">
+		<div id="inside">
+			<div class="statusBar">
+				<div id="administrator"></div>
+			</div>
+
+			<div id="header">
+				<div id="logoHeader">
+					<img th:src="@{resources/images/log-header-tigo.png}"></img>
+				</div>
+				<div id="title">Task Manager</div>
+			</div>
+
+			<div id="contentApp" class="ui-widget-content">
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Task Manager - Dashboard</h3>
+						</div>
+						<div class="panel-body">
+							<form th:action="@{/TaskManager/UpdateRefresh}" th:method="POST">
+								<div class="row">
+									<div class="col-md-12 col-xs-12">
+										<div class="row">
+											<div class="col-md-2 col-xs-2">
+												<div class="form-group">
+													<label for="startDate">Start Time:</label> <input
+														name="startDate" id="startDate" type="text"
+														class="form-control date-time" />
+												</div>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<div class="form-group">
+													<label for="EndDate">End Time:</label> <input
+														name="EndDate" id="EndDate" type="text"
+														class="form-control date-time" />
+												</div>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<div class="form-group">
+													<label for="SelectTask">Task Status:</label> <select
+														name="SelectTask" id="SelectTask" class="form-control">
+														<option>Todos</option>
+														<option th:each="stat : ${statusL}"
+															th:value="${stat.pkTmTaskStatus}"
+															th:text="${stat.taskStatusDescription}"></option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<div class="form-group">
+													<label for="OwnerTask">Task Owner:</label> <input
+														name="OwnerTask" id="OwnerTask" type="text"
+														class="form-control" />
+												</div>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<div class="form-group">
+													<label for="RespTeam">Responsible Team:</label> <input
+														name="RespTeam" id="RespTeam" type="text"
+														class="form-control" />
+												</div>
+											</div>
+											<div class="col-md-2 col-xs-2">
+												<div class="form-group">
+													<label for="RespTeam1">Task Name:</label> <input
+														name="RespTeam1" id="RespTeam1" type="text"
+														class="form-control" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-2 col-xs-2">
+										<button class="btn btn-default" name="btnButtomUp"
+											id="btnButtomUp" type="button" aling="left">Update</button>
+									</div>
+									<div class="form-group col-md-2 col-xs-2">
+										<button class="btn btn-default" name="expdf"
+											id="exxls" type="button" aling="left">Export XLS</button>
+									</div>
+									<div class="form-group col-md-2 col-xs-2">
+										<button class="btn btn-default" name="expdf"
+											id="expdf" type="button" aling="left">Export PDF</button>
+									</div>
+								</div>
+							</form>
+
+							<div class="row">
+								<div class="col-md-12 col-xs-12">
+									<table class="table table-bordered">
+										<thead class="theads">
+											<tr>
+												<th></th>
+												<th rowspan="2">ID Task depend</th>
+												<th rowspan="2">Description</th>
+												<th rowspan="2">Owner Task</th>
+												<th rowspan="2">System/Operation Step</th>
+												<th colspan="3">Estimated</th>
+												<th colspan="3">Real</th>
+												<th></th>
+												<th colspan="2">PERCENT PROGRESS</th>
+												<th rowspan="2">Responsible Team</th>
+											</tr>
+											<tr>
+												<th>ID Task</th>
+												<th>Start Time</th>
+												<th>End Time</th>
+												<th>Total Time</th>
+												<th>Start Time</th>
+												<th>End Time</th>
+												<th>Total Time</th>
+												<th>Status</th>
+												<th>Real</th>
+												<th>Estimated</th>
+											</tr>
+										</thead>
+										<tbody id="taskManagerTable">
+											<tr th:each="tmTask : ${tmTaskL}"
+												th:class="${tmTask.tskRealPercent == 100} ? 'info' : 'danger'">
+												<td th:text="${tmTask.pkTmTsk}"></td>
+												<td th:text="${tmTask.tskIdDepend}"></td>
+												<td th:text="${tmTask.tskDescription}"></td>
+												<td th:text="${tmTask.tskOwner}"></td>
+												<td th:text="${tmTask.systemOperation}"></td>
+												<td th:text="${tmTask.tskEstimatedStartTime}"></td>
+												<td th:text="${tmTask.tskEstimatedEndTime}"></td>
+												<td th:text="${tmTask.tskEstimatedTotalTime}"></td>
+												<td th:text="${tmTask.tskRealStartTime}"></td>
+												<td th:text="${tmTask.tskRealEndTime}"></td>
+												<td th:text="${tmTask.tskRealTotalTime}"></td>
+												<td th:text="${tmTask.tskStatus}"></td>
+												<td th:text="${tmTask.tskRealPercent}"></td>
+												<td th:text="${tmTask.tskEstimatedPercent}"></td>
+												<td th:text="${tmTask.tskTeam}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="form-group col-md-3 col-xs-3">
+									<div class="control-group">
+										<div class="controls form-inline">
+											<label>Refresh Frequency</label> <select name="timesRefresh"
+												id="timesRefresh">
+												<option value="120">Default</option>
+												<option value="60">1</option>
+												<option value="120">2</option>
+												<option value="180">3</option>
+												<option value="240">4</option>
+												<option value="300">5</option>
+												<option value="360">6</option>
+												<option value="420">7</option>
+												<option value="480">8</option>
+
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="form-group col-md-3 col-xs-3">
+										<div class="control-group">
+											<div class="controls form-inline">
+												<label >Refresh Now</label>
+												<div class="">
+														<span></span> <span
+															id="counter"></span>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/resources/js/jquery-ui/js/jquery-ui-1.10.4.ui.js}"></script>
+	<script th:src="@{/resources/js/jquery-te/js/jquery-te-1.4.0.min.js}"></script>
+	<script th:src="@{/resources/js/jquery-ui/js/jquery.ui.widget.js}"></script>
+	<script th:src="@{/resources/js/jquery-ui/js/jquery.ui.datepicker.js}"></script>
+	<script th:src="@{/resources/js/jquery-ui/js/jquery-ui-sliderAccess.js}"></script>
+
+	<script
+		th:src="@{/resources/js/jquery-ui/js/jquery-ui-timepicker-addon.js}"></script>
+	<script th:src="@{/resources/js/jquery-ui/js/datetimepickerSet.js}"></script>
+	<script th:src="@{/resources/js/TmTaskManager.js}"></script> 
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<script type="text/javascript" th:src="@{resources/js/jquery-1.11.3.min.js}"></script>
+  <link rel="stylesheet" type="text/css" th:href="@{resources/css/bootstrap.css}" />
+  <script type="text/javascript" th:src="@{resources/js/bootstrap.js}"></script>
+  <link rel="stylesheet" type="text/css" th:href="@{resources/css/styleapp.css}" />
+	</head>
+	<body>
+		
+		<div id="wrap" align="center">
+			<div id="inside">
+				<div class="statusBar">
+					<div id="administrator">
+
+					</div>
+				</div>
+
+				<div id="header">
+					<div id="logoHeader">
+						<img th:src="@{resources/images/log-header-tigo.png}"></img>
+					</div>
+					<div id="title">Task Manager</div>
+				</div>
+
+				<div id="contentApp" class="ui-widget-content">
+					<div class="row">
+			            <div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Task Usuario</h3>
+							</div>
+							<div class="panel-body">
+
+								<div class="row">
+									<div class="col-md-12 col-xs-12">
+										<div class="col-md-4 col-xs-4">
+											<div class="control-group">
+												<div class="controls form-inline">
+													<label for="OwnerTask">Usuario:</label>
+													<input name="Owner" id="Owner" type="text" class="form-control" />
+													<button class="btn btn-default" name="btnButtomUs"
+													id="btnButtomUs" type="button" aling="left">Enviar</button>
+													<div id="idmesagge">
+													</div>
+											</div>
+										</div>
+									</div>
+									</div>									
+								</div>
+							</div>
+						</div>
+			        </div>
+				</div>
+			</div>
+		</div>
+		<script th:src="@{/resources/js/TaskUser.js}"></script>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+	
+<body>
+		<p>TIGO Task Manager</p>
+		<p th:text="${serverTime}"></p>
+		
+		<table>
+			<tr th:each="task : ${list}">
+				<td th:text="${task.tskDescription}"></td>
+				<td th:text="${task.tskOwner}"></td>
+				<td th:text="${task.tskStatus}"></td>
+			</tr>
+		</table>
+</body>
+</html>

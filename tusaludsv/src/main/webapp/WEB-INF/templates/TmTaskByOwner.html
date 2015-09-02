@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript"
+	th:src="@{resources/js/jquery-1.11.3.min.js}"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{resources/css/bootstrap.css}" />
+<script type="text/javascript" th:src="@{resources/js/bootstrap.js}"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{resources/css/styleapp.css}" />
+<script type="text/javascript" th:src="@{resources/js/TmByOwner.js}"></script>
+</head>
+<body>
+
+	<div id="wrap" align="center">
+		<div id="inside">
+			<div class="statusBar">
+				<div id="administrator"></div>
+			</div>
+
+			<div id="header">
+				<div id="logoHeader">
+					<img th:src="@{resources/images/log-header-tigo.png}" />
+				</div>
+				<div id="title">Task Manager</div>
+			</div>
+
+			<div id="contentApp" class="ui-widget-content">
+				<div class="row">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+
+							<h3 class="panel-title">Task Manager - Dashboard</h3>
+
+							<div class="row">
+								<div class="col-md-12 col-xs-12">
+									<div class="col-md-4 col-xs-4">
+										<div class="control-group">
+											<div class="controls form-inline">
+												<label for="OwnerTask">Usuario:</label> <input name="Owner"
+													id="Owner" type="text" th:value="${owner}"
+													class="form-control" />
+												<button class="btn btn-default" name="btnButtomUs"
+													id="btnButtomUs" type="button" aling="left">Enviar</button>
+												<div id="idmesagge"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+							
+								<div class="col-md-12 col-xs-12">
+									<div class="row" style="margin-top: 12px;">
+										<div th:if="${owner != null || owner != '' }"
+											class="form-group col-md-2 col-xs-2">
+											<div class="control-group">
+												<div class="controls form-inline">
+													<button class="btn btn-default" name="expdf" id="exxls"
+												type="button" aling="rigth">Export XLS</button>
+												</div>
+											</div>
+										</div>
+										<div th:if="${owner != null || owner != ''}"
+											class="form-group col-md-2 col-xs-2">
+											<div class="control-group">
+												<div class="controls form-inline">
+													<button class="btn btn-default" name="expdf" id="expdf"
+													type="button" aling="rigth">Export PDF</button>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12 col-xs-12">
+									<div th:if="${success}"
+										class="alert alert-info alert-dismissable">
+										<button type="button" class="close" data-dismiss="alert"
+											aria-hidden="true">&times;</button>
+										<strong>Tarea modificada con ex&iacute;to</strong>
+									</div>
+									<div th:if="${error}"
+										class="alert alert-danger alert-dismissable">
+										<button type="button" class="close" data-dismiss="alert"
+											aria-hidden="true">&times;</button>
+										<strong>Error al modificar la tarea</strong>
+									</div>
+									<table class="table table-bordered table-striped table-hover">
+										<thead class="theads">
+											<tr>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th colspan="3">Estimated</th>
+												<th colspan="3">Real</th>
+												<th></th>
+												<th colspan="2">PERCENT PROGRESS</th>
+												<th></th>
+											</tr>
+											<tr>
+												<th></th>
+												<th>ID Task</th>
+												<th>Description</th>
+												<th>Start Time</th>
+												<th>End Time</th>
+												<th>Total Time</th>
+												<th>Start Time</th>
+												<th>End Time</th>
+												<th>Total Time</th>
+												<th>Status</th>
+												<th>Real</th>
+												<th>Estimated</th>
+												<th>Responsible Team</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="tmtask : ${list}"
+												th:class="${tmtask.tskRealPercent == 100} ? 'info' : ''">
+												<td>
+													<div th:if="${tmtask.dependTask == 'false'}">
+														<button type="button"
+															class="btn btn-default btn-sm updateTm"
+															data-th-attr="data-id=${tmtask.pkTmTsk},data-name=${tmtask.tskDescription},data-progress=${tmtask.tskRealPercent},data-status=${tmtask.tskStatus}">
+															<img width="15px" height="15px"
+																th:src="@{/resources/images/localiza_edit_icon.png}" />
+														</button>
+													</div>
+													<div th:if="${tmtask.dependTask == 'true'}">
+														<button type="button" class="btn btn-default btn-sm"
+															disabled="disabled">
+															<img width="15px" height="15px"
+																th:src="@{/resources/images/localiza_edit_icon.png}" />
+														</button>
+													</div>
+												</td>
+												<td th:text="${tmtask.pkTmTsk}"></td>
+												<td th:text="${tmtask.tskDescription}"></td>
+												<td th:text="${tmtask.tskEstimatedStartTime}"></td>
+												<td th:text="${tmtask.tskEstimatedEndTime}"></td>
+												<td th:text="${tmtask.tskEstimatedTotalTime}"></td>
+												<td th:text="${tmtask.tskRealStartTime}"></td>
+												<td th:text="${tmtask.tskRealEndTime}"></td>
+												<td th:text="${tmtask.tskRealTotalTime}"></td>
+												<td th:text="${tmtask.tskStatus}"></td>
+												<td th:text="${tmtask.tskRealPercent}+'%'"></td>
+												<td th:text="${tmtask.tskEstimatedPercent+'%'}"></td>
+												<td th:text="${tmtask.tskTeam}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Update task</h4>
+				</div>
+				<div class="modal-body">
+					<label id="Task_id"></label> <br></br> <label id="Task_des"></label>
+					<br></br>
+					<div class="row">
+						<input type="text" id="id" name="taskId" style="display: none;" />
+						<div class="col-md-6">
+							<label for="exampleInputPassword3">Task Status:</label>
+							<div class="form-group">
+								<select class="form-control" id="task_sts" name="state">
+									<option value="1">No Start</option>
+									<option value="2">End On time</option>
+									<option value="3">Delay</option>
+									<option value="4">In Progres</option>
+									<option value="5">End with Delay</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label for="exampleInputPassword3">Real Percent Progress:</label>
+							<div class="form-group">
+								<input type="number" class="form-control" id="task_percent"
+									name="progress" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" id="saveChanges">Save
+						changes</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+</body>
+</html>
